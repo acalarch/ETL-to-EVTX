@@ -141,7 +141,7 @@ while($true){
             $log.LastUpdate = $mylogs[$mylogs.Length - 1].TimeCreated
             write-host "    ...Converted" $mylogs.Length "logs"
             write-host "    ...Latest log was at:" $log.LastUpdate
-            $mylogs | foreach-object {$message = $_.Message + ";`n`nTime = " + $_.TimeCreated + ";`nLevel = " + $_.Level + ";`nMachineName = " + $_.MachineName + ";`nProcessId = " + $_.ProcessId + ";`nThreadId = " + $_.ThreadId + ";`nUserId = " + $_.UserId + ";`nCount = " + $count + ";"; Write-EventLog -LogName $log.Name -Source $log.Name -EventId $_.Id -Message $message}; $count = $count + 1; Start-Sleep -m 5
+            $mylogs | foreach-object {$message = $_.Message + ";`n`nTime = " + $_.TimeCreated + "`nLevel = " + $_.Level + "`nMachineName = " + $_.MachineName + "`nProcessId = " + $_.ProcessId + "`nThreadId = " + $_.ThreadId + "`nUserId = " + $_.UserId + "`nCount = " + $count; Write-EventLog -LogName $log.Name -Source $log.Name -EventId $_.Id -Message $message}; $count = $count + 1; Start-Sleep -m 5
         }
         else{
             write-host "    ...No new logs to convert"
